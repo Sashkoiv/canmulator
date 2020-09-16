@@ -1,6 +1,5 @@
 import click
-# import yaml
-# import os
+from canmulator import transmit
 
 
 @click.command()
@@ -12,28 +11,21 @@ import click
     default="can0",
 )
 @click.option(
-    "-p", "--pcap",
+    "-j", "--json",
     required=True,
-    type=click.STRING,
-    help="pcap file address",
-)
-@click.option(
-    "-s", "--speed",
-    required=False,
-    default=500000,
-    type=click.INT,
-    help="CAn speed in kbps",
+    type=click.Path(exists=True),
+    help="json file path",
 )
 def cli(**kwargs):
-    """CANmulator is a tool for transmitting CAn frames from `pcap` file.
+    """CANmulator is a tool for transmitting CAn frames from `json` file.
     """
-    print(locals())
+    transmit(**kwargs)
 
 
 def main():
     try:
         cli()
-    except e:
+    except Exception as e:
         print(f'Start failed with error: {e}')
 
 
