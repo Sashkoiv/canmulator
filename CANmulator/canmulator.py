@@ -24,7 +24,7 @@ def transmit(**kwargs) -> None:
     """Sends CAN messages to initialized port"""
     bus = _can_bus_init(kwargs['can'])
 
-    in_dict = _parse_pcap(kwargs['pcap'])
+    in_dict = _parse_pcap(kwargs['json'])
 
     for frame in in_dict:
         can_id = frame['_source']['layers']['can']['can.id']
